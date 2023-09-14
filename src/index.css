@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #e7f4da;
+}
+
+.table-title {
+  border: 1px solid #7FB23A;
+  border-collapse: collapse;
+}
+
+.table-items {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+@layer base {
+  .table-title {
+    @apply text-xs text-gray-200 py-2 text-center;
+  }
+  .table-items {
+    @apply text-xs font-semibold py-2 text-center whitespace-nowrap;
+  }
+  .input-title {
+    @apply font-semibold text-base sm:w-40 w-24;
+  }
+}
