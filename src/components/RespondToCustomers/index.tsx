@@ -27,16 +27,9 @@ const RespondToCustomers: React.FC = () => {
   const [responseOptionList, setResponseOptionList] = useState([]);
 
   const handleSubmit = useCallback(async (values: any) => {
-   
-    const data: any = await axios.post(
-      `${baseUrl}/api/updateExcelFile`,
-      {
-        ...values,
-      }
-    );
-    
-   
-
+    const data: any = await axios.post(`${baseUrl}/api/updateExcelFile`, {
+      ...values,
+    });
   }, []);
 
   const fetchResponsesBasedonDateSelected = async (date: string) => {
@@ -54,32 +47,31 @@ const RespondToCustomers: React.FC = () => {
       };
     });
     setResponseOptionList(optionsList);
-   
   };
 
-  const responsehandleChange = (token:string)=>{
-     
-   const responseObject =  responseList?.find((item:any)=> item.Token === token)
-    setInitialState((prevState)=>{
+  const responsehandleChange = (token: string) => {
+    const responseObject = responseList?.find(
+      (item: any) => item.Token === token
+    );
+    setInitialState((prevState) => {
       return {
-      ...prevState,
-      brand: responseObject?.Brand,
-      store: responseObject?.StoreName,
-      name: responseObject?.CustomerName,
-      gender: responseObject?.CustomerGender,
-      phoneNumber: responseObject?.CustomerMobileNumber,
-      attempt: responseObject?.Attempt,
-      contactedCustomer: responseObject?.Contact,
-      resolutionType: responseObject?.['Resolution Type'],
-      customerFeedback: responseObject?.['CustomerFeedback'],
-      country: responseObject?.['Country'],
-      storeEmail: responseObject?.['StoreEmail1'],
-      hrContacted: responseObject?.['HR or Customer Service'],
-      token
-      }
-  })
-
-  }
+        ...prevState,
+        brand: responseObject?.Brand,
+        store: responseObject?.StoreName,
+        name: responseObject?.CustomerName,
+        gender: responseObject?.CustomerGender,
+        phoneNumber: responseObject?.CustomerMobileNumber,
+        attempt: responseObject?.Attempt,
+        contactedCustomer: responseObject?.Contact,
+        resolutionType: responseObject?.["Resolution Type"],
+        customerFeedback: responseObject?.["CustomerFeedback"],
+        country: responseObject?.["Country"],
+        storeEmail: responseObject?.["StoreEmail1"],
+        hrContacted: responseObject?.["HR or Customer Service"],
+        token,
+      };
+    });
+  };
 
   return (
     <>
@@ -120,7 +112,6 @@ const RespondToCustomers: React.FC = () => {
                         handleChange(e);
                       }}
                       name="date"
-                  
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     />
                   </div>
@@ -128,19 +119,17 @@ const RespondToCustomers: React.FC = () => {
                     <label className="input-title">Select Response ID:</label>
                     <select
                       name="responseId"
-                      onChange={(e)=>{
-                        const value = e.target.value
-                        responsehandleChange(value)
-                        handleChange(e)
-                      }
-                      }
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        responsehandleChange(value);
+                        handleChange(e);
+                      }}
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     >
                       <option value="Select">Select</option>
                       {responseOptionList.map((item: any) => {
                         return <option value={item.token}>{item.token}</option>;
                       })}
-                      
                     </select>
                   </div>
                   <div className="flex items-center gap-2 mt-4">

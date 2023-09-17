@@ -1,3 +1,4 @@
 
 
-export const baseUrl = "http://ec2-34-229-72-15.compute-1.amazonaws.com"
+export const baseUrl = "https://mmkyneftb2.execute-api.us-east-1.amazonaws.com"
+export const JWT_TOKEN = "authorization"
