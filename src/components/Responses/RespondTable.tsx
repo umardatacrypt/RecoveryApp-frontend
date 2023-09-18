@@ -1,7 +1,16 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios from "axios";
 import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
+import moment from "moment";
+import { ExcelDateToJSDate } from "../../utils/helper";
+
 const RespondTable: React.FC = () => {
   const [disable, setDisable] = useState<boolean>(false);
   const [offset, setOffset] = useState(0);
@@ -24,12 +33,8 @@ const RespondTable: React.FC = () => {
   //   setResponsesList(responsesList.data.paginatedDataList);
   // }, []);
 
-
-
-
-
-
   useEffect(() => {
+    console.log("test");
     responseCtx.getTableList();
   }, []);
 
@@ -39,18 +44,18 @@ const RespondTable: React.FC = () => {
       setOffset(offset + 10);
       setDisable(false);
     }
-     if (offset <= count) {
+    if (offset <= count) {
       setDisable(true);
     }
   };
 
   const handlePrevButton = () => {
     if (offset > 10) {
-     // getTableList(offset);
+      // getTableList(offset);
       setOffset(offset - 10);
       setDisable(false);
-    } 
-     if (offset < 10) {
+    }
+    if (offset < 10) {
       setDisable(true);
     }
   };
@@ -73,22 +78,36 @@ const RespondTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {responseCtx.responses?.map((item:any,index:any)=>{
-        return(
-          <tr>
-          <td className="table-items">{item?.['Date of Negative Response']}</td>
-          <td className="table-items">{item?.['CustomerFeedback']}</td>
-          <td className="table-items">{item?.['StoreName']}</td>
-          <td className="table-items">{item?.['CustomerGender']}</td>
-          <td className="table-items">{item?.['CustomerMobileNumber']}</td>
-          <td className="table-items">{item?.['CustomerEmail']}</td>
-          <td className="table-items">{item?.['Date of Reaching out']}</td>
-          <td className="table-items">{item?.['Contact']}</td>
-          <td className="table-items">{item?.['Attempt']}</td>
-          <td className="table-items">{item?.['Resolution Type']}</td>
-        </tr>
-        )})}
-        
+          {responseCtx.responses?.map((item: any, index: any) => {
+            return (
+              <tr
+                // onClick={() => {
+                //   responseCtx.responseSetToken(item?.["Token"]);
+                //   console.log(index);
+                // }}
+                className="cursor-pointer"
+                key={index}
+              >
+                <td className="table-items">
+                  {ExcelDateToJSDate(item?.["Date of Negative Response"])}
+                  {/* {item?.["Date of Negative Response"]} */}
+                </td>
+                <td className="table-items">{item?.["CustomerFeedback"]}</td>
+                <td className="table-items">{item?.["StoreName"]}</td>
+                <td className="table-items">{item?.["CustomerGender"]}</td>
+                <td className="table-items">
+                  {item?.["CustomerMobileNumber"]}
+                </td>
+                <td className="table-items">{item?.["CustomerEmail"]}</td>
+                <td className="table-items">
+                  {item?.["Date of Reaching out"]}
+                </td>
+                <td className="table-items">{item?.["Contact"]}</td>
+                <td className="table-items">{item?.["Attempt"]}</td>
+                <td className="table-items">{item?.["Resolution Type"]}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       {/* <div className="flex justify-end items-center gap-10 mt-10 w-full">
@@ -117,4 +136,4 @@ const RespondTable: React.FC = () => {
   );
 };
 
-export default RespondTable;
+export default memo(RespondTable);

@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import * as Icons from "../../components/Global/Icons";
 import { Form, Formik } from "formik";
 import axios from "axios";
 import { baseUrl } from "../constant";
+import ResponseContext from "../Context";
 
 const RespondToCustomers: React.FC = () => {
   const [initialState, setInitialState] = useState({
@@ -25,6 +26,7 @@ const RespondToCustomers: React.FC = () => {
 
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
+  const responseCtx: any = useContext<any>(ResponseContext);
 
   const handleSubmit = useCallback(async (values: any) => {
     const data: any = await axios.post(`${baseUrl}/api/updateExcelFile`, {
@@ -72,6 +74,34 @@ const RespondToCustomers: React.FC = () => {
       };
     });
   };
+
+  const setSelectedTokenDetails = async () => {
+    const responseObject = await responseCtx.getTableListById();
+    console.log(responseObject);
+    setInitialState((prevState) => {
+      return {
+        ...prevState,
+        brand: responseObject?.Brand,
+        store: responseObject?.StoreName,
+        name: responseObject?.CustomerName,
+        gender: responseObject?.CustomerGender,
+        phoneNumber: responseObject?.CustomerMobileNumber,
+        attempt: responseObject?.Attempt,
+        contactedCustomer: responseObject?.Contact,
+        resolutionType: responseObject?.["Resolution Type"],
+        customerFeedback: responseObject?.["CustomerFeedback"],
+        country: responseObject?.["Country"],
+        storeEmail: responseObject?.["StoreEmail1"],
+        hrContacted: responseObject?.["HR or Customer Service"],
+        token: responseObject?.["Token"],
+      };
+    });
+  };
+
+  // useEffect(() => {
+  //   console.log(responseCtx.token, "token");
+  //   setSelectedTokenDetails();
+  // }, [responseCtx.token]);
 
   return (
     <>

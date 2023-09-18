@@ -4,6 +4,8 @@ import { baseUrl } from "../constant";
 import { useLocation } from "react-router-dom";
 import MyContext from "../Context";
 import ResponseContext from "../Context";
+import * as Icons from "../../components/Global/Icons";
+import { useAuth } from "../../context/AuthContext";
 
 interface IResonseToCustomer {
   respondToCustomerCount: number;
@@ -15,6 +17,7 @@ interface IRequestObject {
 }
 
 const Recovery: React.FC = () => {
+  const { logout } = useAuth();
   const location = useLocation();
   const url = `${baseUrl}/api/allResponses?BuCode=${location.pathname.replace(
     "/",
@@ -31,7 +34,6 @@ const Recovery: React.FC = () => {
     fetchRecoveryList();
   }, []);
 
-
   const fetchRecoveryList = useCallback(async () => {
     const apiRequest: IRequestObject = await axios.get(url);
     const resonseToCustomer: IResonseToCustomer = apiRequest.data;
@@ -43,26 +45,19 @@ const Recovery: React.FC = () => {
     setShowResponsesCount(responsesCount);
   }, []);
 
-  const fetchResponsesBasedonType = useCallback((text:string)=>{
-
-    
-    if(text === 'Respond To Customers'){
-       responseCtx.getRespondToCustomerList()
+  const fetchResponsesBasedonType = useCallback((text: string) => {
+    if (text === "Respond To Customers") {
+      responseCtx.getRespondToCustomerList();
     }
 
-    if(text === 'View All Responses'){
-      responseCtx.getViewAllResponseList()
-      
+    if (text === "View All Responses") {
+      responseCtx.getViewAllResponseList();
     }
 
-    if(text === 'View New Responses'){
-      responseCtx.getViewNewResponseList()
-      
+    if (text === "View New Responses") {
+      responseCtx.getViewNewResponseList();
     }
-
-
-  },[])
-
+  }, []);
 
   // setPost(fetchRecoveryList);
 
@@ -91,8 +86,9 @@ const Recovery: React.FC = () => {
   const renderRecoveryData = recoveryData.map((items: any, index: number) => {
     return (
       <React.Fragment key={`${items.id} ${index}`}>
-        <a href="#table"
-         onClick={()=> fetchResponsesBasedonType(items.respondingText)}
+        <a
+          href="#table"
+          onClick={() => fetchResponsesBasedonType(items.respondingText)}
         >
           <div className="rounded-2xl border-[3px] border-black px-5 py-7 bg-white hover:bg-table-header">
             <h1 className="text-2xl font-bold text-center">
@@ -115,10 +111,13 @@ const Recovery: React.FC = () => {
   return (
     <>
       <div className="lg:w-[50rem] md:w-[40rem] mx-auto flex flex-col justify-center items-center min-h-screen lg:py-0 py-20">
-        <div className="w-full">
+        <div className="w-full flex justify-between">
           <h2 className="text-2xl font-semibold md:text-start text-center">
             Azadea HR Service Recovery
           </h2>
+          <div className="cursor-pointer" onClick={() => logout()}>
+            <Icons.SignOut />
+          </div>
         </div>
         <div className="mt-24 grid lg:grid-cols-3 md:grid-cols-2 gap-10">
           {renderRecoveryData}

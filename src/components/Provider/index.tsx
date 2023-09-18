@@ -11,6 +11,7 @@ const ResponseProvider = (props: any) => {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
   const [count, setTotalCount] = useState<number>(0);
+  const [token, setToken] = useState<string>("");
 
   const getTableList = useCallback(async (offset = 0, limit = 10) => {
     const responsesList: any = await axios.post(
@@ -23,6 +24,14 @@ const ResponseProvider = (props: any) => {
     );
     setTotalCount(responsesList.data.totalCount);
     setResponseList(responsesList.data.paginatedDataList);
+  }, []);
+
+  const getTableListById = useCallback(() => {
+    console.log(responseList[0]);
+  }, []);
+
+  const responseSetToken = useCallback((token: any) => {
+    setToken(token);
   }, []);
 
   const getRespondToCustomerList = useCallback(
@@ -62,11 +71,14 @@ const ResponseProvider = (props: any) => {
   }, []);
 
   const responseContext: any = {
+    token: token,
     responses: responseList,
     getTableList: getTableList,
     getRespondToCustomerList: getRespondToCustomerList,
     getViewAllResponseList: getViewAllResponseList,
     getViewNewResponseList: getViewNewResponseList,
+    getTableListById: getTableListById,
+    responseSetToken: responseSetToken,
   };
 
   return (
