@@ -31,14 +31,4 @@ function App() {
   );
 }
 
-const RequireAuth = ({ children }: { children: any }) => {
-  const location = useLocation();
-
-  if (isLoggedIn()) {
-    return children;
-  }
-
-  return <Navigate to="/login" state={{ from: location }} />;
-};
-
 export default App;

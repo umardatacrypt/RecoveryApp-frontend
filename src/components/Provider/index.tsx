@@ -18,6 +18,7 @@ const ResponseProvider = (props: any) => {
       {
         offset,
         limit,
+        bucode,
       }
     );
     setTotalCount(responsesList.data.totalCount);
