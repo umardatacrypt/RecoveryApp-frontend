@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import * as Icons from "../../components/Global/Icons";
 import { Form, Formik } from "formik";
 import axios from "axios";
@@ -31,7 +25,6 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
     storeEmail: "",
     hrContacted: "",
   });
-  const bottomEl = useRef<null | HTMLDivElement>(null);
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
   const responseCtx: any = useContext<any>(ResponseContext);
@@ -104,7 +97,6 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
           token: responseObject?.["Token"],
         };
       });
-      bottomEl?.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   };
 
@@ -115,11 +107,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
   return (
     <>
       <div className="overflow-x-auto mx-auto flex flex-col justify-center items-center py-20 lg:px-20 px-5">
-        <div
-          ref={bottomEl}
-          id="form"
-          className="w-full flex items-center justify-between"
-        >
+        <div id="form" className="w-full flex items-center justify-between">
           <h2 className="text-2xl font-semibold md:text-start text-center">
             Respond to Customers
           </h2>

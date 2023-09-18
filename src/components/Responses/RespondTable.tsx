@@ -69,7 +69,7 @@ const RespondTable: React.FC<ResponsesProps> = ({ fetchRowData }) => {
         <thead>
           <tr className="bg-table-header">
             <th className="table-title">Date</th>
-            <th className="table-title">Response ID</th>
+            <th className="table-title">Customer Feedback</th>
             <th className="table-title">Name</th>
             <th className="table-title">Gender</th>
             <th className="table-title">Phone</th>
