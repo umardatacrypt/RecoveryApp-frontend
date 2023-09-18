@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 function ExcelDateToJSDate(serial: number) {
   var utc_days = Math.floor(serial - 25569);
   var utc_value = utc_days * 86400;
@@ -24,4 +26,12 @@ function ExcelDateToJSDate(serial: number) {
   ).toLocaleDateString();
 }
 
-export { ExcelDateToJSDate };
+function toaster(type: string, msg: string) {
+  if (type === "success") {
+    return toast.success(msg);
+  } else if (type === "error") {
+    return toast.error(msg);
+  }
+}
+
+export { ExcelDateToJSDate, toaster };

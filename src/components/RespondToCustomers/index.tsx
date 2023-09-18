@@ -4,6 +4,8 @@ import { Form, Formik } from "formik";
 import axios from "axios";
 import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
+import moment from "moment";
+import { toaster } from "../../utils/helper";
 interface ResponsesProps {
   itemList: any; // Replace with the actual type of fetchRowData
 }
@@ -30,9 +32,19 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
   const responseCtx: any = useContext<any>(ResponseContext);
 
   const handleSubmit = useCallback(async (values: any) => {
-    const data: any = await axios.post(`${baseUrl}/api/updateExcelFile`, {
+    // conssole.log(values);
+    const response: any = await axios.post(`${baseUrl}/api/updateExcelFile`, {
       ...values,
     });
+    if (response.status === 200) {
+      toaster("success", "Record successfully updated");
+      typeof window !== "undefined" &&
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+    }
   }, []);
 
   const fetchResponsesBasedonDateSelected = async (date: string) => {
@@ -94,6 +106,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
           country: responseObject?.["Country"],
           storeEmail: responseObject?.["StoreEmail1"],
           hrContacted: responseObject?.["HR or Customer Service"],
+          date_of_response: responseObject?.["Date of Reaching out"],
           token: responseObject?.["Token"],
         };
       });
@@ -169,6 +182,10 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                       type="date"
                       name="date_of_response"
                       onChange={handleChange}
+                      value={
+                        moment(values.date_of_response).format("YYYY-MM-DD") ||
+                        ""
+                      }
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     />
                   </div>

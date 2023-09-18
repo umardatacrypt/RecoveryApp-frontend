@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import ResponseProvider from "./components/Provider";
 import { UserProvider } from "./context/UserContext";
 import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -17,6 +18,7 @@ root.render(
         <ResponseProvider>
           <UserProvider>
             <App />
+            <Toaster position="top-center" reverseOrder={false} />
           </UserProvider>
         </ResponseProvider>
       </AuthProvider>
