@@ -1,11 +1,19 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as Icons from "../../components/Global/Icons";
 import { Form, Formik } from "formik";
 import axios from "axios";
 import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
-
-const RespondToCustomers: React.FC = () => {
+interface ResponsesProps {
+  itemList: any; // Replace with the actual type of fetchRowData
+}
+const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
   const [initialState, setInitialState] = useState({
     date: "",
     responseId: "",
@@ -23,7 +31,7 @@ const RespondToCustomers: React.FC = () => {
     storeEmail: "",
     hrContacted: "",
   });
-
+  const bottomEl = useRef<null | HTMLDivElement>(null);
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
   const responseCtx: any = useContext<any>(ResponseContext);
@@ -76,37 +84,42 @@ const RespondToCustomers: React.FC = () => {
   };
 
   const setSelectedTokenDetails = async () => {
-    const responseObject = await responseCtx.getTableListById();
-    console.log(responseObject);
-    setInitialState((prevState) => {
-      return {
-        ...prevState,
-        brand: responseObject?.Brand,
-        store: responseObject?.StoreName,
-        name: responseObject?.CustomerName,
-        gender: responseObject?.CustomerGender,
-        phoneNumber: responseObject?.CustomerMobileNumber,
-        attempt: responseObject?.Attempt,
-        contactedCustomer: responseObject?.Contact,
-        resolutionType: responseObject?.["Resolution Type"],
-        customerFeedback: responseObject?.["CustomerFeedback"],
-        country: responseObject?.["Country"],
-        storeEmail: responseObject?.["StoreEmail1"],
-        hrContacted: responseObject?.["HR or Customer Service"],
-        token: responseObject?.["Token"],
-      };
-    });
+    if (itemList) {
+      const responseObject = itemList;
+      setInitialState((prevState) => {
+        return {
+          ...prevState,
+          brand: responseObject?.Brand,
+          store: responseObject?.StoreName,
+          name: responseObject?.CustomerName,
+          gender: responseObject?.CustomerGender,
+          phoneNumber: responseObject?.CustomerMobileNumber,
+          attempt: responseObject?.Attempt,
+          contactedCustomer: responseObject?.Contact,
+          resolutionType: responseObject?.["Resolution Type"],
+          customerFeedback: responseObject?.["CustomerFeedback"],
+          country: responseObject?.["Country"],
+          storeEmail: responseObject?.["StoreEmail1"],
+          hrContacted: responseObject?.["HR or Customer Service"],
+          token: responseObject?.["Token"],
+        };
+      });
+      bottomEl?.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   };
 
-  // useEffect(() => {
-  //   console.log(responseCtx.token, "token");
-  //   setSelectedTokenDetails();
-  // }, [responseCtx.token]);
+  useEffect(() => {
+    setSelectedTokenDetails();
+  }, [itemList]);
 
   return (
     <>
       <div className="overflow-x-auto mx-auto flex flex-col justify-center items-center py-20 lg:px-20 px-5">
-        <div id="form" className="w-full flex items-center justify-between">
+        <div
+          ref={bottomEl}
+          id="form"
+          className="w-full flex items-center justify-between"
+        >
           <h2 className="text-2xl font-semibold md:text-start text-center">
             Respond to Customers
           </h2>

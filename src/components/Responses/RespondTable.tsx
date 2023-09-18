@@ -10,8 +10,11 @@ import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
 import moment from "moment";
 import { ExcelDateToJSDate } from "../../utils/helper";
+interface ResponsesProps {
+  fetchRowData: any; // Replace with the actual type of fetchRowData
+}
 
-const RespondTable: React.FC = () => {
+const RespondTable: React.FC<ResponsesProps> = ({ fetchRowData }) => {
   const [disable, setDisable] = useState<boolean>(false);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
@@ -81,10 +84,7 @@ const RespondTable: React.FC = () => {
           {responseCtx.responses?.map((item: any, index: any) => {
             return (
               <tr
-                // onClick={() => {
-                //   responseCtx.responseSetToken(item?.["Token"]);
-                //   console.log(index);
-                // }}
+                onClick={() => fetchRowData(item)}
                 className="cursor-pointer"
                 key={index}
               >

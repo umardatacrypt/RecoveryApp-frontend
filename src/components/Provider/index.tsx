@@ -26,8 +26,8 @@ const ResponseProvider = (props: any) => {
     setResponseList(responsesList.data.paginatedDataList);
   }, []);
 
-  const getTableListById = useCallback(() => {
-    console.log(responseList[0]);
+  const getTableListById = useCallback(async (rowId: any) => {
+    return responseList[rowId];
   }, []);
 
   const responseSetToken = useCallback((token: any) => {
