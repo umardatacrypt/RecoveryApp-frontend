@@ -5,7 +5,7 @@ import axios from "axios";
 import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
 import moment from "moment";
-import { toaster } from "../../utils/helper";
+import { scrollToTop, toaster } from "../../utils/helper";
 interface ResponsesProps {
   itemList: any; // Replace with the actual type of fetchRowData
 }
@@ -124,7 +124,9 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
           <h2 className="text-2xl font-semibold md:text-start text-center">
             Respond to Customers
           </h2>
-          <Icons.HomeIcon />
+          <div onClick={() => scrollToTop()} className="cursor-pointer">
+            <Icons.HomeIcon />
+          </div>
         </div>
         <Formik
           initialValues={initialState}

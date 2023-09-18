@@ -1,6 +1,7 @@
 import React from "react";
 import * as Icons from "../../components/Global/Icons";
 import RespondTable from "./RespondTable";
+import { scrollToTop } from "../../utils/helper";
 interface ResponsesProps {
   fetchRowData: any; // Replace with the actual type of fetchRowData
 }
@@ -15,7 +16,9 @@ const Responses: React.FC<ResponsesProps> = ({ fetchRowData }) => {
           <h2 className="text-2xl font-semibold md:text-start text-center">
             New Responses
           </h2>
-          <Icons.HomeIcon />
+          <div onClick={() => scrollToTop()} className="cursor-pointer">
+            <Icons.HomeIcon />
+          </div>
         </div>
         <RespondTable fetchRowData={fetchRowData} />
       </div>

@@ -34,4 +34,13 @@ function toaster(type: string, msg: string) {
   }
 }
 
-export { ExcelDateToJSDate, toaster };
+function scrollToTop() {
+  typeof window !== "undefined" &&
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+}
+
+export { ExcelDateToJSDate, toaster, scrollToTop };
