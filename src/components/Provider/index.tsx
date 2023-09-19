@@ -49,6 +49,7 @@ const ResponseProvider = (props: any) => {
   );
 
   const getViewAllResponseList = useCallback(async (offset = 0, limit = 10) => {
+    console.log(bucode);
     const responsesList: any = await axios.post(
       `${baseUrl}/api/viewAllResponses?BuCode=${bucode}`,
       {

@@ -4,6 +4,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import { isLoggedIn } from "./utils/jwtHelper";
 import { ProtectedRoute } from "./routes/ProtectedRoutes";
+import BuCodeData from "./pages/BuCodeData";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <>Home Page</>
+              <HomePage />
             </ProtectedRoute>
           }
         />
@@ -21,7 +22,7 @@ function App() {
           path="/:bucode"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <BuCodeData />
             </ProtectedRoute>
           }
         />

@@ -1,25 +1,25 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Responses from "../components/Responses";
 import Recovery from "../components/Recovery";
 import RespondToCustomers from "../components/RespondToCustomers";
+import axios from "axios";
+import { baseUrl } from "../components/constant";
+import BuCodeList from "../components/BuCodeList/BuCodeList";
 
 const HomePage: React.FC = () => {
-  const [itemList, setItemList] = useState({});
+  const [itemList, setItemList] = useState([]);
   //   const history;
-  const fetchRowData = useCallback(async (item: any) => {
-    setItemList(item);
-    typeof window !== "undefined" &&
-      window.scroll({
-        top: document.body.scrollHeight,
-        left: 0,
-        behavior: "smooth",
-      });
+  const fetchBuCode = useCallback(async () => {
+    const response: any = await axios.get(`${baseUrl}/api/allBucode`);
+    setItemList(response.data.data);
+  }, []);
+
+  useEffect(() => {
+    fetchBuCode();
   }, []);
   return (
     <>
-      <Recovery />
-      <Responses fetchRowData={fetchRowData} />
-      <RespondToCustomers itemList={itemList} />
+      <BuCodeList buCodeList={itemList} />
     </>
   );
 };

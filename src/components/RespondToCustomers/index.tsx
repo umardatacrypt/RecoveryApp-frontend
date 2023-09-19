@@ -8,8 +8,12 @@ import moment from "moment";
 import { scrollToTop, toaster } from "../../utils/helper";
 interface ResponsesProps {
   itemList: any; // Replace with the actual type of fetchRowData
+  fetchRecoveryList: any;
 }
-const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
+const RespondToCustomers: React.FC<ResponsesProps> = ({
+  itemList,
+  fetchRecoveryList,
+}) => {
   const [initialState, setInitialState] = useState({
     date: "",
     responseId: "",
@@ -38,6 +42,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
     });
     if (response.status === 200) {
       toaster("success", "Record successfully updated");
+      fetchRecoveryList();
       typeof window !== "undefined" &&
         window.scroll({
           top: 0,
@@ -196,7 +201,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                     <input
                       type="text"
                       name="brand"
-                      onChange={handleChange}
+                      readOnly
                       value={values.brand}
                       placeholder="Enter the Brand Name"
                       className="px-3 h-10 w-60 border-[2px] border-black"
@@ -207,7 +212,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                     <input
                       type="text"
                       name="store"
-                      onChange={handleChange}
+                      // onChange={handleChange}
+                      readOnly
                       value={values.store}
                       placeholder="Enter the Store Name"
                       className="px-3 h-10 w-60 border-[2px] border-black"
@@ -221,7 +227,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                     <input
                       type="text"
                       name="name"
-                      onChange={handleChange}
+                      // onChange={handleChange}
+                      readOnly
                       value={values.name}
                       placeholder="Enter the Name"
                       className="px-3 h-10 w-60 border-[2px] border-black"
@@ -233,7 +240,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                       name="gender"
                       id="gender"
                       value={values.gender}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     >
                       <option value="male">Male</option>
@@ -246,7 +253,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                       type="number"
                       name="phoneNumber"
                       value={values.phoneNumber}
-                      onChange={handleChange}
+                      // onChange={handleChange}
+                      readOnly
                       placeholder="Enter the Phone Number"
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     />
@@ -317,7 +325,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                   <label className="font-semibold">Customer Feedback:</label>
                   <textarea
                     name="customerFeedback"
-                    onChange={handleChange}
+                    // onChange={handleChange}
+                    readOnly
                     value={values.customerFeedback}
                     placeholder="Enter Your Feedback Here..."
                     className="p-3 w-full border-[2px] border-black h-40 mt-2"
@@ -326,7 +335,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                     <label className="input-title">Country:</label>
                     <input
                       name="country"
-                      onChange={handleChange}
+                      // onChange={handleChange}
+                      readOnly
                       value={values.country}
                       type="text"
                       placeholder="Enter the Country Name"
@@ -339,7 +349,8 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({ itemList }) => {
                       name="storeEmail"
                       type="text"
                       value={values.storeEmail}
-                      onChange={handleChange}
+                      // onChange={handleChange}
+                      readOnly
                       placeholder="Enter the Store Email"
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     />
