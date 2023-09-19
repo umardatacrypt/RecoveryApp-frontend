@@ -17,11 +17,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     fetchBuCode();
   }, []);
-  return (
-    <>
-      <BuCodeList buCodeList={itemList} />
-    </>
-  );
+  return <>Home Page</>;
 };
 
 export default HomePage;

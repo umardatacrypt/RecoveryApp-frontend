@@ -4,6 +4,7 @@ import { useUser } from "../context/UserContext";
 
 const Login: React.FC = () => {
   const { email, loggedIn } = useUser();
+
   useEffect(() => {
     console.log(email);
   }, []);

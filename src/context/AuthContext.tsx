@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { JWT_TOKEN } from "../components/constant";
 import { useLocalStorage } from "./useLocalstorage";
+import { getLocalstorageData } from "../utils/localStorageHelper";
 
 type AuthContextType = {
   user: string | null;
@@ -20,14 +21,20 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useLocalStorage("user", null);
   const [token, setToken] = useLocalStorage(JWT_TOKEN, null);
+
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
   const login = async (data: any) => {
     const { token, email } = data;
+    const bCode = getLocalstorageData("bucode");
     setUser(email);
     setToken(token);
-    navigate("/");
+    if (bCode) {
+      navigate(`/${bCode}`);
+    } else {
+      navigate("/");
+    }
   };
 
   // call this function to sign out logged in user
