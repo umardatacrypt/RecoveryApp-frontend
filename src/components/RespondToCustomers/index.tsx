@@ -6,6 +6,7 @@ import { baseUrl } from "../constant";
 import ResponseContext from "../Context";
 import moment from "moment";
 import { scrollToTop, toaster } from "../../utils/helper";
+import { useLocation } from "react-router-dom";
 interface ResponsesProps {
   itemList: any; // Replace with the actual type of fetchRowData
   fetchRecoveryList: any;
@@ -30,10 +31,13 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
     country: "",
     storeEmail: "",
     hrContacted: "",
+    resolutionDetails: "",
   });
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
   const responseCtx: any = useContext<any>(ResponseContext);
+  const location = useLocation();
+  const bucode = location.pathname.replace("/", "");
 
   const handleSubmit = useCallback(async (values: any) => {
     // conssole.log(values);
@@ -57,6 +61,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
       `${baseUrl}/api/fetchRecordsBasedonDate`,
       {
         date,
+        bucode,
       }
     );
     const responseResultList = responsesList.data.filteredRecords;
@@ -89,6 +94,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
         storeEmail: responseObject?.["StoreEmail1"],
         hrContacted: responseObject?.["HR or Customer Service"],
         token,
+        resolutionDetails: responseObject?.["resolutionDetails"],
       };
     });
   };
@@ -113,6 +119,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
           hrContacted: responseObject?.["HR or Customer Service"],
           date_of_response: responseObject?.["Date of Reaching out"],
           token: responseObject?.["Token"],
+          resolutionDetails: responseObject?.["resolutionDetails"],
         };
       });
     }
@@ -311,6 +318,22 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       </option>
                     </select>
                   </div>
+                  {values?.resolutionType === "Other" ? (
+                    <div className="flex items-center gap-2 mt-4">
+                      <label className="font-semibold">
+                        Resoluition Details:
+                      </label>
+                      <textarea
+                        name="resolutionDetails"
+                        onChange={handleChange}
+                        value={values.resolutionDetails}
+                        placeholder="Enter Your Resoultion Details Here..."
+                        className="p-3 w-full border-[2px] border-black h-40 mt-2"
+                      ></textarea>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="lg:w-1/2 w-full">
                   <h4 className="font-bold text-base">Customer Response:</h4>
