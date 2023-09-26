@@ -33,6 +33,13 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
     hrContacted: "",
     resolutionDetails: "",
     BusinessType: "",
+    BetterExperience: "",
+    Products: "",
+    StoreExperience: "",
+    FittingRooms: "",
+    ValueForMoney: "",
+    StoreAtmosphere: "",
+    FBQuality: "",
   });
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
@@ -97,6 +104,13 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
         token,
         resolutionDetails: responseObject?.["ResolutionDetails"],
         BusinessType: responseObject?.["BusinessType"],
+        BetterExperience: responseObject?.["BetterExperience"],
+        Products: responseObject?.["Products"],
+        StoreExperience: responseObject?.["StoreExperience"],
+        FittingRooms: responseObject?.["FittingRooms"],
+        StoreAtmosphere: responseObject?.["StoreAtmosphere"],
+        ValueForMoney: responseObject?.["ValueForMoney"],
+        FBQuality: responseObject?.["F&BQuality"],
       };
     });
   };
@@ -123,6 +137,13 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
           token: responseObject?.["Token"],
           resolutionDetails: responseObject?.["ResolutionDetails"],
           BusinessType: responseObject?.["BusinessType"],
+          BetterExperience: responseObject?.["BetterExperience"],
+          Products: responseObject?.["Products"],
+          StoreExperience: responseObject?.["StoreExperience"],
+          FittingRooms: responseObject?.["FittingRooms"],
+          StoreAtmosphere: responseObject?.["StoreAtmosphere"],
+          ValueForMoney: responseObject?.["ValueForMoney"],
+          FBQuality: responseObject?.["F&BQuality"],
         };
       });
     }
@@ -345,19 +366,21 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       <p className="mt-2">
                         What can be improved for a better experience?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <div className="m-2">
+                        {values.BetterExperience || "-"}
+                      </div>
                       <p className="mt-2">
                         What can be improved with our products?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.Products || "-"}</div>
                       <p className="mt-2">
                         What can be improved with our products?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.StoreExperience || "-"}</div>
                       <p className="mt-2">
                         What can be improved with our products?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.FittingRooms || "-"}</div>
                     </>
                   ) : (
                     ""
@@ -367,19 +390,21 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       <p className="mt-2">
                         What can be improved for a better experience?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <div className="m-2">
+                        {values.BetterExperience || "-"}
+                      </div>
                       <p className="mt-2">
                         What can be improved with our store atmosphere?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.StoreAtmosphere || "-"}</div>
                       <p className="mt-2">
                         What can be improved about our value for money?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.ValueForMoney || "-"}</div>
                       <p className="mt-2">
                         What can be improved about our F&B Quality?{" "}
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.FBQuality || "-"}</div>
                     </>
                   ) : (
                     ""
@@ -389,19 +414,17 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       <p className="mt-2">
                         What can be improved for a better experience?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <div className="m-2">
+                        {values.BetterExperience || "-"}
+                      </div>
                       <p className="mt-2">
-                        What can be improved with our store atmosphere?
+                        What can be improved with our products?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.Products || "-"}</div>
                       <p className="mt-2">
-                        What can be improved about our value for money?
+                        What can be improved about the store experience?
                       </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
-                      <p className="mt-2">
-                        What can be improved about our F&B Quality?{" "}
-                      </p>
-                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <div className="m-2">{values.StoreExperience || "-"}</div>
                     </>
                   ) : (
                     ""
