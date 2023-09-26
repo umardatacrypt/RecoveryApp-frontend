@@ -345,7 +345,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                   {values?.resolutionType === "Other" ? (
                     <div className="flex items-center gap-2 mt-4">
                       <label className="font-semibold">
-                        Resoluition Details:
+                        Resolution Details:
                       </label>
                       <textarea
                         name="resolutionDetails"
