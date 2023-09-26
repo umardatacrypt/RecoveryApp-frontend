@@ -94,7 +94,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
         storeEmail: responseObject?.["StoreEmail1"],
         hrContacted: responseObject?.["HR or Customer Service"],
         token,
-        resolutionDetails: responseObject?.["resolutionDetails"],
+        resolutionDetails: responseObject?.["ResolutionDetails"],
       };
     });
   };
@@ -119,7 +119,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
           hrContacted: responseObject?.["HR or Customer Service"],
           date_of_response: responseObject?.["Date of Reaching out"],
           token: responseObject?.["Token"],
-          resolutionDetails: responseObject?.["resolutionDetails"],
+          resolutionDetails: responseObject?.["ResolutionDetails"],
         };
       });
     }
