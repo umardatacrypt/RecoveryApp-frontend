@@ -32,6 +32,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
     storeEmail: "",
     hrContacted: "",
     resolutionDetails: "",
+    BusinessType: "",
   });
   const [responseList, setResponseList] = useState<any>();
   const [responseOptionList, setResponseOptionList] = useState([]);
@@ -95,6 +96,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
         hrContacted: responseObject?.["HR or Customer Service"],
         token,
         resolutionDetails: responseObject?.["ResolutionDetails"],
+        BusinessType: responseObject?.["BusinessType"],
       };
     });
   };
@@ -120,6 +122,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
           date_of_response: responseObject?.["Date of Reaching out"],
           token: responseObject?.["Token"],
           resolutionDetails: responseObject?.["ResolutionDetails"],
+          BusinessType: responseObject?.["BusinessType"],
         };
       });
     }
@@ -337,14 +340,72 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                 </div>
                 <div className="lg:w-1/2 w-full">
                   <h4 className="font-bold text-base">Customer Response:</h4>
-                  <p className="mt-2">
-                    What can be improved for a better experience?
-                  </p>
-                  <div className="w-2 h-[2px] mt-2 bg-black"></div>
-                  <p className="mt-2">
-                    What can be improved our staff and services?
-                  </p>
-                  <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                  {values.BusinessType === "Fashion" ? (
+                    <>
+                      <p className="mt-2">
+                        What can be improved for a better experience?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved with our products?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved with our products?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved with our products?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {values.BusinessType === "F&B" ? (
+                    <>
+                      <p className="mt-2">
+                        What can be improved for a better experience?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved with our store atmosphere?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved about our value for money?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved about our F&B Quality?{" "}
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {values.BusinessType === "Multimedia" ? (
+                    <>
+                      <p className="mt-2">
+                        What can be improved for a better experience?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved with our store atmosphere?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved about our value for money?
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                      <p className="mt-2">
+                        What can be improved about our F&B Quality?{" "}
+                      </p>
+                      <div className="w-2 h-[2px] mt-2 mb-5 bg-black"></div>
+                    </>
+                  ) : (
+                    ""
+                  )}
                   <label className="font-semibold">Customer Feedback:</label>
                   <textarea
                     name="customerFeedback"
