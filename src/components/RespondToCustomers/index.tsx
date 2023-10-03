@@ -462,7 +462,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       className="px-3 h-10 w-60 border-[2px] border-black"
                     />
                   </div>
-                  <div className="flex items-center gap-2 mt-10">
+                  {/* <div className="flex items-center gap-2 mt-10">
                     <label className="font-bold text-base">
                       Has Customer Service contacted the customer on behalf of
                       HR?
@@ -477,7 +477,7 @@ const RespondToCustomers: React.FC<ResponsesProps> = ({
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
-                  </div>
+                  </div> */}
                   <div className="flex justify-end items-end mt-10 h-32">
                     <button className="cursor-pointer" type="submit">
                       <Icons.SubmitIcon />
